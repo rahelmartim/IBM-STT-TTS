@@ -19,7 +19,7 @@ class SpeechToText():
 
         if not file_name:
             raise ValueError('Expected file name')
-        if not (".flac" in file_name):
+        if ".flac" not in file_name:
             raise ValueError('Expected .flac file')
 
         if language == self.__NOT_DEFINED:
