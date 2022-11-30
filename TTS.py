@@ -25,10 +25,14 @@ class TextToSpeech():
             return self.__DEFAULT_VOICE
 
         all_voices = self.list_voices()
-        for voice in all_voices['voices']:
-            if target_language in voice['language']:
-                return voice['name']
-        return self.__DEFAULT_VOICE
+        return next(
+            (
+                voice['name']
+                for voice in all_voices['voices']
+                if target_language in voice['language']
+            ),
+            self.__DEFAULT_VOICE,
+        )
 
     def speech(self, text, file_name=__NOT_DEFINED,
                voice=__NOT_DEFINED, language=__NOT_DEFINED, play_after=True):
