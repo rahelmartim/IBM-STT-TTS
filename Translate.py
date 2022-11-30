@@ -21,10 +21,14 @@ class Translator():
 
     def search_language_code(self, language_name):
         all_languages = self.list_languages()
-        for language in all_languages['languages']:
-            if language['language_name'].lower() == language_name.lower():
-                return language['language']
-        return None
+        return next(
+            (
+                language['language']
+                for language in all_languages['languages']
+                if language['language_name'].lower() == language_name.lower()
+            ),
+            None,
+        )
 
     def translate(self, text, source, target):
         self.__validate()
